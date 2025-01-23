@@ -39,7 +39,7 @@ Recommended tailored marketing strategoes for each segment, estimated to increas
 2. Used the Elbow Method and Silhouette Score to determine the optimal number of clusters.
 
 
-## 3. Tools & Technologies
+## 4. Tools & Technologies
 1. Languages: Python, R
 2. Libraries: Pandas, Scikit-learn, Matplotlib, ggplot2 (for R visualizations)
 3. Big Data Tools: PySpark, Databricks
@@ -60,5 +60,44 @@ Recommended tailored marketing strategoes for each segment, estimated to increas
 │   ├── spark_processing.py     # PySpark script for large-scale data processing
 ├── README.md                  # Project documentation
 ```
+
+# How to Run
+## 1. Clone the repository:
+   ```
+git clone https://github.com/yourusername/customer-segmentation.git
+cd customer-segmentation
+```
+## 2. Set up Environment:
+
+```
+pip install -r requirements.txt
+```
+Alternatiely, load the R environment by running customer_segmentation.Rmd
+
+## 3. Run Python Implementation:
+1. Open notebooks/customer_segmentation.ipynb in Jupyter Notebook.
+2. Run all cells to reproduce the analysis.
+
+## 4. Run R Implementation:
+1. Open customer_segmentation.Rmd in RStudio or any R Markdown editor.
+2. Knit the file to see the outputs.
+
+# Results & Visualizations
+## 1. Customer Segments:
+
+(Add visualizations here)
+
+## 2. Insights:
+1. High-value customers account for 60% of total revenue.
+2. At-risk customers can be re-engaged with loyalty discounts.
+
+# Future Work
+1. Enhance the model by incorporating demographic data.
+2. Deploy the segmentation solution as a real-time service using Flask and Databricks.
+
+
+# Acknowledgments
+1. Dataset sourced from UCI Machine Learning Repository.
+2. Inspired by practical use cases in customer analytics.
 
 
