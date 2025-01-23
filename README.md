@@ -48,7 +48,7 @@ Recommended tailored marketing strategoes for each segment, estimated to increas
 
 # Repository Structure
 
-```
+```bash
 ├── data/
 │   ├── online_retail.csv      # Input dataset
 ├── notebooks/
