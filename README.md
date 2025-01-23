@@ -24,6 +24,23 @@ Identified 4 distinct customer segments:
 
 Recommended tailored marketing strategoes for each segment, estimated to increase customer retention by 15%. 
 
+# Technical Implementation
+## 1. Data Preparation
+Used the Online Retail Dataset.
+Cleaned data using PySpark for handling large-scale datasets.
+2. Feature Engineering
+Created RFM (Recency, Frequency, Monetary) metrics using Python (Pandas).
+Normalized features to ensure balanced clustering.
+3. Clustering Model
+Applied K-Means Clustering to segment customers.
+Used the Elbow Method and Silhouette Score to determine the optimal number of clusters.
+4. Tools & Technologies
+Languages: Python, R
+Libraries: Pandas, Scikit-learn, Matplotlib, ggplot2 (for R visualizations)
+Big Data Tools: PySpark, Databricks
+Visualization Tools: Matplotlib, Seaborn, ggplot2
+
+
 
 
 
