@@ -46,7 +46,19 @@ Recommended tailored marketing strategoes for each segment, estimated to increas
 4. Visualization Tools: Matplotlib, Seaborn, ggplot2
 
 
+# Repository Structure
 
-
+```
+├── data/
+│   ├── online_retail.csv      # Input dataset
+├── notebooks/
+│   ├── customer_segmentation.ipynb  # Jupyter Notebook for Python implementation
+│   ├── customer_segmentation.Rmd    # R Markdown for R implementation
+├── src/
+│   ├── data_preprocessing.py   # Python scripts for data cleaning
+│   ├── clustering_model.py     # Python script for K-Means
+│   ├── spark_processing.py     # PySpark script for large-scale data processing
+├── README.md                  # Project documentation
+```
 
 
