@@ -52,13 +52,12 @@ Recommended tailored marketing strategoes for each segment, estimated to increas
 ├── data/
 │   ├── online_retail.csv      # Input dataset
 ├── notebooks/
-│   ├── customer_segmentation.ipynb  # Jupyter Notebook for Python implementation
 │   ├── customer_segmentation.Rmd    # R Markdown for R implementation
 ├── src/
-│   ├── data_preprocessing.py   # Python scripts for data cleaning
-│   ├── clustering_model.py     # Python script for K-Means
-│   ├── spark_processing.py     # PySpark script for large-scale data processing
-├── README.md                  # Project documentation
+│   ├── data_preprocessing.R   # R script for data cleaning
+│   ├── clustering_model.R     # R script for K-Means and clustering
+│   ├── spark_processing.R     # (Optional) Placeholder for Spark integration in R
+                # Project documentation
 ```
 
 # How to Run
