@@ -47,7 +47,7 @@ Recommended tailored marketing strategoes for each segment, estimated to increas
 
 
 # Repository Structure
-
+Please note that curretly this structure is not available. 
 ```bash
 ├── data/
 │   ├── online_retail.csv      # Input dataset
