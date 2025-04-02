@@ -1,0 +1,21 @@
+---
+title: "Customer Segmentation Analysis"
+output: html_document
+---
+
+```{r, setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(cluster)
+library(factoextra)
+
+
+rfm_data <- read.csv("../data/customer_segments.csv")
+head(rfm_data)
+
+fviz_cluster(kmeans_model, data = rfm_data[, c("Recency", "Frequency", "Monetary")])
+
+rfm_data %>%
+  group_by(Cluster) %>%
+  summarise(across(c(Recency, Frequency, Monetary), mean))
+
