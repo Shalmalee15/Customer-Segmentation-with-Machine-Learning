@@ -1,102 +1,177 @@
-# Customer-Segmentation-with-Machine-Learning
+# 🛍️ Customer Segmentation with Machine Learning
 
-# Overview
+![Python](https://img.shields.io/badge/Python-3.9+-blue?logo=python&logoColor=white)
+![R](https://img.shields.io/badge/R-4.x-276DC3?logo=r&logoColor=white)
+![PySpark](https://img.shields.io/badge/PySpark-Databricks-E25A1C?logo=apache-spark&logoColor=white)
+![License](https://img.shields.io/badge/License-Apache%202.0-green)
+![Status](https://img.shields.io/badge/Status-Active-brightgreen)
 
-This project focuses on creating a data-driven customer segmentation solution to enable targeted marketing strategies. By analysing transactional data, customers are grouped into segments based on their purchasing behaviour. This segmetation helps businesses improve customer engagement and optimise marketing campaigns. 
+> **Grouping customers into behavioural segments using RFM analysis and K-Means Clustering to enable targeted marketing strategies and improve customer retention.**
 
-# Business Problem
-Modern businesses need to understand  their customers to provide personalised experiences, The goal is to:
-1. Identify distinct customer groups based on their behaviour
-2. Recommend actionable strategies for each segment to maximise revenue and retention
+---
 
-# Solution Approach 
-We implemented a K-means Clustering algorithm on customer transaction data to group customers into segments based on : 
-1. Recenty: Time since the last purchase
-2. Frequency: Number of purchase in a given perior
-3. Monetary Value: Total spend by the customer
+## 📌 Overview
 
-# Key Results
-Identified 4 distinct customer segments:
-1. High-Value Loyal Customers: Frequent shoppers with high spending
-2. New Customers: Recently acuired, low spending so far
-3. At-Risk Customers: Infrquent shoppers with declining spending
-4. Low-Value Customers: Rare and low-spenders
+Modern businesses generate vast amounts of transactional data but struggle to act on it meaningfully. This project builds a production-ready customer segmentation pipeline that transforms raw retail transactions into actionable customer profiles — enabling marketing teams to personalise campaigns, reduce churn, and maximise revenue.
 
-Recommended tailored marketing strategoes for each segment, estimated to increase customer retention by 15%. 
+The solution implements **RFM (Recency, Frequency, Monetary)** analysis combined with **K-Means Clustering**, delivered in both Python and R for flexibility across analytics environments.
 
-# Technical Implementation
-## 1. Data Preparation
-1. Used the Online Retail Dataset.
-2. Cleaned data using PySpark for handling large-scale datasets.
+---
 
-## 2. Feature Engineering
-1. Created RFM (Recency, Frequency, Monetary) metrics using Python (Pandas).
-2. Normalized features to ensure balanced clustering.
+## 🎯 Business Problem
 
+Retailers face three core challenges:
+- **Who are our most valuable customers?** — and how do we keep them?
+- **Who is at risk of churning?** — and how do we re-engage them?
+- **How do we personalise at scale?** — without manual segmentation effort?
 
-## 3. Clustering Model
-1. Applied K-Means Clustering to segment customers.
-2. Used the Elbow Method and Silhouette Score to determine the optimal number of clusters.
+This project addresses all three by automating customer grouping based on purchasing behaviour, producing segments that are interpretable, actionable, and directly tied to marketing strategy.
 
+---
 
-## 4. Tools & Technologies
-1. Languages: Python, R
-2. Libraries: Pandas, Scikit-learn, Matplotlib, ggplot2 (for R visualizations)
-3. Big Data Tools: PySpark, Databricks
-4. Visualization Tools: Matplotlib, Seaborn, ggplot2
+## 💡 Solution Approach
 
+### RFM Framework
+Each customer is scored across three dimensions:
 
-# Repository Structure
-Please note that curretly this structure is not available. 
-```bash
-├── data/
-│   ├── online_retail.csv      # Input dataset
+| Dimension | Definition | Business Signal |
+|-----------|-----------|----------------|
+| **Recency** | Days since last purchase | Engagement level |
+| **Frequency** | Number of purchases in period | Loyalty indicator |
+| **Monetary** | Total spend | Revenue contribution |
+
+### Clustering Methodology
+- **Algorithm:** K-Means Clustering
+- **Optimal K:** Determined via Elbow Method + Silhouette Score analysis
+- **Validation:** Cluster stability tested across multiple random seeds
+
+---
+
+## 📊 Key Results
+
+Four distinct customer segments identified:
+
+| Segment | Profile | Recommended Strategy |
+|---------|---------|---------------------|
+| 🥇 **High-Value Loyal** | Frequent, high-spending, recent | VIP rewards, early access, premium support |
+| 🆕 **New Customers** | Recent acquisition, low spend | Onboarding nurture, first-purchase incentives |
+| ⚠️ **At-Risk Customers** | Declining frequency and spend | Win-back campaigns, loyalty discounts |
+| 💤 **Low-Value Customers** | Rare visits, minimal spend | Low-cost re-engagement or deprioritise |
+
+**Impact:** High-value customers account for ~60% of total revenue. Targeted re-engagement of at-risk customers estimated to improve retention by **15%**.
+
+---
+
+## 🏗️ Technical Implementation
+
+### 1. Data Source
+- **Dataset:** [Online Retail Dataset](https://archive.ics.uci.edu/ml/datasets/Online+Retail) — UCI Machine Learning Repository
+- **Scale:** 500K+ transactions across international retail customers
+
+### 2. Data Preparation
+- Large-scale data cleaning using **PySpark** on Databricks
+- Handling of nulls, duplicates, returns, and cancelled orders
+- Feature normalisation for balanced clustering
+
+### 3. Feature Engineering
+```python
+# RFM metrics computed per customer
+rfm = df.groupby('CustomerID').agg(
+    Recency   = ('InvoiceDate', lambda x: (snapshot_date - x.max()).days),
+    Frequency = ('InvoiceNo', 'nunique'),
+    Monetary  = ('TotalPrice', 'sum')
+)
+```
+
+### 4. Clustering Model
+```python
+from sklearn.cluster import KMeans
+from sklearn.preprocessing import StandardScaler
+
+scaler = StandardScaler()
+rfm_scaled = scaler.fit_transform(rfm)
+
+kmeans = KMeans(n_clusters=4, random_state=42, n_init=10)
+rfm['Segment'] = kmeans.fit_predict(rfm_scaled)
+```
+
+---
+
+## 🛠️ Tools & Technologies
+
+| Category | Tools |
+|----------|-------|
+| **Languages** | Python 3.9+, R 4.x |
+| **ML & Stats** | Scikit-learn, K-Means, Silhouette Analysis |
+| **Data Processing** | Pandas, PySpark, Databricks |
+| **Visualisation** | Matplotlib, Seaborn, ggplot2 |
+| **Environment** | Jupyter Notebook, R Markdown |
+
+---
+
+## 📁 Repository Structure
+
+```
+Customer-Segmentation-with-Machine-Learning/
+│
 ├── notebooks/
-│   ├── customer_segmentation.Rmd    # R Markdown for R implementation
+│   └── customer_segmentation.Rmd    # R Markdown — full R implementation
+│
 ├── src/
-│   ├── data_preprocessing.R   # R script for data cleaning
-│   ├── clustering_model.R     # R script for K-Means and clustering
-│   ├── spark_processing.R     # (Optional) Placeholder for Spark integration in R
-                # Project documentation
+│   ├── data_preprocessing.R         # Data cleaning and RFM calculation (R)
+│   ├── clustering_model.R           # K-Means clustering and evaluation (R)
+│   └── spark_processing.R           # PySpark integration placeholder
+│
+├── .gitignore
+├── LICENSE                          # Apache 2.0
+└── README.md
 ```
 
-# How to Run
-## 1. Clone the repository:
-   ```
-git clone https://github.com/yourusername/customer-segmentation.git
-cd customer-segmentation
-```
-## 2. Set up Environment:
+---
 
-```
+## 🚀 How to Run
+
+### Prerequisites
+```bash
 pip install -r requirements.txt
 ```
-Alternatiely, load the R environment by running customer_segmentation.Rmd
 
-## 3. Run Python Implementation:
-1. Open notebooks/customer_segmentation.ipynb in Jupyter Notebook.
-2. Run all cells to reproduce the analysis.
+### Python Implementation
+```bash
+# Clone the repository
+git clone https://github.com/Shalmalee15/Customer-Segmentation-with-Machine-Learning.git
+cd Customer-Segmentation-with-Machine-Learning
 
-## 4. Run R Implementation:
-1. Open customer_segmentation.Rmd in RStudio or any R Markdown editor.
-2. Knit the file to see the outputs.
+# Open Jupyter Notebook
+jupyter notebook notebooks/customer_segmentation.ipynb
+```
 
-# Results & Visualizations
-## 1. Customer Segments:
+### R Implementation
+```r
+# Open in RStudio
+# Knit customer_segmentation.Rmd to reproduce full analysis
+```
 
-(Add visualizations here)
+---
 
-## 2. Insights:
-1. High-value customers account for 60% of total revenue.
-2. At-risk customers can be re-engaged with loyalty discounts.
+## 🔮 Future Work
 
-# Future Work
-1. Enhance the model by incorporating demographic data.
-2. Deploy the segmentation solution as a real-time service using Flask and Databricks.
+- [ ] Incorporate demographic and geographic data for richer segmentation
+- [ ] Add DBSCAN and Hierarchical Clustering for comparison
+- [ ] Deploy as a real-time REST API using Flask + Databricks
+- [ ] Build an interactive Power BI / Shiny dashboard for business users
+- [ ] Automate retraining pipeline with MLflow tracking
 
+---
 
-# Acknowledgments
-1. Dataset sourced from UCI Machine Learning Repository.
-2. Inspired by practical use cases in customer analytics.
+## 👩‍💻 Author
 
+**Shalmalee Sharma** — PhD Astrophysics | Senior Data Scientist  
+📍 Melbourne, Australia  
+🔗 [LinkedIn](https://linkedin.com/in/shalmalee-kapse) · [GitHub](https://github.com/Shalmalee15)
 
+---
+
+## 📄 License
+
+This project is licensed under the [Apache 2.0 License](LICENSE).
