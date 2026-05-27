@@ -1,0 +1,23 @@
+# Customer Segmentation with Machine Learning
+# Python 3.9+
+
+# Core data processing
+pandas==2.1.0
+numpy==1.24.3
+
+# Machine learning
+scikit-learn==1.3.0
+
+# Visualisation
+matplotlib==3.7.2
+seaborn==0.12.2
+plotly==5.15.0
+
+# Jupyter
+jupyter==1.0.0
+ipykernel==6.25.0
+nbformat==5.9.2
+
+# Utilities
+python-dotenv==1.0.0
+tqdm==4.65.0
